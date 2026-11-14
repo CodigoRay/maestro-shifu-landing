@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080809">
+  <meta name="description" content="Una presentación especial de Maestro Shifu.">
+  <title>Maestro Shifu | Presentación</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080809;
+      --panel: rgba(15, 15, 18, .88);
+      --red: #ed2538;
+      --red-dark: #9d101e;
+      --white: #f7f5f2;
+      --muted: #aaa7a7;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 78% 15%, rgba(137, 15, 27, .20), transparent 31%),
+        radial-gradient(ellipse at 12% 70%, rgba(105, 13, 25, .16), transparent 29%),
+        linear-gradient(135deg, #080809 0%, #101014 52%, #070708 100%);
+      color: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: 350px; height: 350px;
+      right: -90px; top: -105px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #c51d30 0 48%, #84101c 68%, transparent 70%);
+      opacity: .42;
+      filter: blur(1px);
+    }
+    body::after {
+      inset: 0;
+      opacity: .12;
+      background-image: repeating-linear-gradient(132deg, transparent 0 65px, rgba(255,255,255,.08) 66px, transparent 69px);
+      mask-image: linear-gradient(110deg, #000, transparent 35%, transparent 70%, #000);
+    }
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 34px 0 42px;
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 0 0 27px;
+      user-select: none;
+    }
+    .brand-mark {
+      width: 43px; height: 35px;
+      margin-bottom: 4px;
+      color: #f7f5f2;
+    }
+    .brand-name {
+      font-weight: 950;
+      letter-spacing: .075em;
+      line-height: .88;
+      font-size: clamp(24px, 4vw, 37px);
+      text-transform: uppercase;
+    }
+    .brand-name span {
+      display: block;
+      margin-top: 5px;
+      color: var(--red);
+      font-size: 1.28em;
+      font-style: italic;
+      letter-spacing: -.045em;
+      transform: skew(-9deg);
+      text-shadow: 0 7px 24px rgba(237,37,56,.25);
+    }
+    .eyebrow {
+      margin: 0 0 13px;
+      color: #d7d1d0;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .headline {
+      margin: 0 0 23px;
+      max-width: 760px;
+      text-align: center;
+      font-size: clamp(23px, 4vw, 39px);
+      font-weight: 850;
+      letter-spacing: -.045em;
+      line-height: 1.08;
+    }
+    .headline em { color: var(--red); font-style: normal; }
+    .video-shell {
+      width: min(930px, 100%);
+      padding: 9px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(255,255,255,.11), rgba(255,255,255,.025) 28%, rgba(0,0,0,.42));
+      box-shadow: 0 28px 90px rgba(0,0,0,.58), 0 0 60px rgba(168,16,34,.12);
+    }
+    .video-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #030304;
+      aspect-ratio: 16 / 9;
+    }
+    video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #030304;
+    }
+    .start-overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(0,0,0,.3), rgba(0,0,0,.84));
+    }
+    .start-overlay[hidden] { display: none; }
+    .start-card { max-width: 440px; }
+    .play-icon {
+      display: grid;
+      place-items: center;
+      width: 66px; height: 66px;
+      margin: 0 auto 17px;
+      padding-left: 4px;
+      border: 1px solid rgba(255,255,255,.4);
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 34px rgba(237,37,56,.3);
+      font-size: 24px;
+    }
+    .start-card h2 { margin: 0 0 7px; font-size: clamp(19px, 3vw, 26px); }
+    .start-card p { margin: 0 0 18px; color: #d0cbcb; font-size: 14px; line-height: 1.5; }
+    .primary-button, .sound-button {
+      border: 0;
+      border-radius: 999px;
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .primary-button { padding: 13px 23px; background: var(--red); }
+    .primary-button:hover { background: #ff3448; transform: translateY(-1px); }
+    .sound-row {
+      display: flex;
+      justify-content: flex-end;
+      margin: 12px 2px 0;
+    }
+    .sound-button {
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.07);
+      color: #eee;
+      font-size: 12px;
+    }
+    .sound-button:hover { background: rgba(255,255,255,.13); }
+    .status {
+      width: min(430px, 100%);
+      margin: 23px auto 0;
+      text-align: center;
+    }
+    .status-line {
+      min-height: 24px;
+      color: #efebeb;
+      font-size: 14px;
+      font-weight: 650;
+    }
+    .progress-track {
+      height: 6px;
+      overflow: hidden;
+      margin-top: 12px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.17);
+    }
+    .progress-fill {
+      width: 0%; height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #a90f20, #ff3448);
+      transition: width .12s linear;
+    }
+    .notice {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .footer {
+      margin-top: auto;
+      padding-top: 35px;
+      color: #777477;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    @media (max-width: 600px) {
+      .page { width: min(100% - 22px, 1120px); padding-top: 25px; }
+      .brand { margin-bottom: 23px; }
+      .video-shell { padding: 5px; border-radius: 12px; }
+      .video-frame { border-radius: 8px; }
+      .sound-row { margin-top: 9px; }
+      .status { margin-top: 19px; }
+      .notice { max-width: 310px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="brand" aria-label="Maestro Shifu">
+      <svg class="brand-mark" viewBox="0 0 64 48" fill="none" aria-hidden="true">
+        <path d="M12 19 19 7l13-4 13 4 7 12-5 18H17L12 19Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M7 20h50M21 24h7m8 0h7M27 32c3 3 7 3 10 0M24 40v5m16-5v5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <div class="brand-name">Maestro <span>Shifu</span></div>
+    </header>
+
+    <p class="eyebrow">Una experiencia para la comunidad</p>
+    <h1 class="headline">Prepárate para lo que viene.<br><em>Disfruta el mensaje.</em></h1>
+
+    <section class="video-shell" aria-label="Video de presentación">
+      <div class="video-frame">
+        <video id="introVideo" autoplay muted playsinline controls preload="auto">
+          <source src="media/video.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+        <div class="start-overlay" id="startOverlay" hidden>
+          <div class="start-card">
+            <div class="play-icon" aria-hidden="true">▶</div>
+            <h2 id="overlayTitle">Tu video está listo</h2>
+            <p id="overlayText">Pulsa para comenzar la reproducción. Al terminar, irás al sitio externo.</p>
+            <button class="primary-button" id="startButton" type="button">Reproducir video</button>
+          </div>
+        </div>
+      </div>
+      <div class="sound-row">
+        <button class="sound-button" id="soundButton" type="button" aria-pressed="false">Activar sonido</button>
+      </div>
+    </section>
+
+    <section class="status" aria-live="polite">
+      <div class="status-line" id="statusText">Cargando presentación...</div>
+      <div class="progress-track" aria-label="Progreso del video">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="notice">Cuando el video termine, serás redirigido automáticamente a un sitio externo.</p>
+    </section>
+
+    <footer class="footer">Maestro Shifu · Comunidad</footer>
+  </main>
+
+  <script>
+    // CONFIGURACIÓN: cambia VIDEO_SRC si el archivo tiene otro nombre o ubicación.
+    const VIDEO_SRC = "media/video.mp4";
+    const REDIRECT_URL = "https://uplcm.com/4/10118997";
+    const REDIRECT_DELAY_MS = 900;
+
+    const video = document.getElementById("introVideo");
+    const source = video.querySelector("source");
+    const overlay = document.getElementById("startOverlay");
+    const startButton = document.getElementById("startButton");
+    const soundButton = document.getElementById("soundButton");
+    const statusText = document.getElementById("statusText");
+    const progressFill = document.getElementById("progressFill");
+    let redirecting = false;
+
+    // Mantiene la ruta del video sincronizada con la configuración.
+    source.src = VIDEO_SRC;
+    video.load();
+
+    function showStart(message) {
+      document.getElementById("overlayTitle").textContent = "Tu video está listo";
+      document.getElementById("overlayText").textContent = message;
+      overlay.hidden = false;
+      statusText.textContent = "Pulsa reproducir para comenzar";
+    }
+
+    async function startPlayback() {
+      try {
+        overlay.hidden = true;
+        await video.play();
+        statusText.textContent = "Reproduciendo presentación...";
+      } catch (error) {
+        showStart("El navegador bloqueó la reproducción automática. Pulsa para iniciar el video.");
+      }
+    }
+
+    startButton.addEventListener("click", startPlayback);
+
+    // La reproducción automática funciona de forma más consistente en modo silenciado.
+    window.addEventListener("load", () => {
+      startPlayback();
+    });
+
+    soundButton.addEventListener("click", () => {
+      video.muted = !video.muted;
+      soundButton.textContent = video.muted ? "Activar sonido" : "Silenciar";
+      soundButton.setAttribute("aria-pressed", String(!video.muted));
+      if (!video.muted) video.volume = 1;
+    });
+
+    video.addEventListener("playing", () => {
+      overlay.hidden = true;
+      statusText.textContent = "Reproduciendo presentación...";
+    });
+
+    video.addEventListener("timeupdate", () => {
+      if (Number.isFinite(video.duration) && video.duration > 0) {
+        const percent = Math.min(100, (video.currentTime / video.duration) * 100);
+        progressFill.style.width = percent + "%";
+      }
+    });
+
+    video.addEventListener("ended", () => {
+      if (redirecting) return;
+      redirecting = true;
+      progressFill.style.width = "100%";
+      statusText.textContent = "Presentación finalizada. Redirigiendo...";
+      setTimeout(() => {
+        window.location.replace(REDIRECT_URL);
+      }, REDIRECT_DELAY_MS);
+    });
+
+    video.addEventListener("error", () => {
+      if (redirecting) return;
+      showStart("No se pudo cargar media/video.mp4. Sube el archivo MP4 a la carpeta media dentro de public_html y recarga esta página.");
+      statusText.textContent = "No se encontró el archivo de video";
+    });
+  </script>
+</body>
+</html>
